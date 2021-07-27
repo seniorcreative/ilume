@@ -1,0 +1,22 @@
+/* App Theme */
+
+// Breakpoints
+$mobile: 768px;
+$tablet: 1024px;
+$desktop: 1980px;
+
+// Colours
+$dark: #333;
+$light: #efefef;
+
+// Fonts
+$headingFont: arial, "sans-serif";
+$bodyFont: arial, "sans-serif";
+
+// Defaults
+#app {
+    font-family: Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+}
