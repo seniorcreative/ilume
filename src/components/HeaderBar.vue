@@ -1,5 +1,5 @@
 <template>
-  <section></section>
+  <header>Header</header>
 </template>
 
 <script>

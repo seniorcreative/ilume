@@ -1,7 +1,7 @@
 <template>
   <section>
-      <title>Home</title>
-      <dialog-view>
+      <h1>Title</h1>
+      <dialog-view></dialog-view>
   </section>
 </template>
 
@@ -15,5 +15,7 @@ export default {
 </script>
 
 <style lang="scss">
-
+  section {
+    height: calc(100vh - 200px);
+  }
 </style>
