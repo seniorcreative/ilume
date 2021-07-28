@@ -14,7 +14,7 @@ export const routeConfig = createRouter({
   routes
 })
 
-// routeConfig.beforeEach(async (to,from, next) => {
-//     window.scrollTo(0,0)
-//     next()
+// routeConfig.beforeEach(async (to, from, next) => {
+//   window.scrollTo(0, 0)
+//   next()
 // })
