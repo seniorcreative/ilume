@@ -1,4 +1,9 @@
-/* App Theme */
+/* Morty Theme */
+
+// Includes
+@import "./reset.meyer";
+@import "./helpers";
+@import "./transitions";
 
 // Breakpoints
 $mobile: 768px;
@@ -9,9 +14,12 @@ $desktop: 1980px;
 $dark: #333;
 $light: #efefef;
 
+// Elements
+$footerHeight: 200px;
+
 // Fonts
-$headingFont: Arial, 'sans-serif';
-$bodyFont: Arial, 'sans-serif';
+$headingFont: Arial, "sans-serif";
+$bodyFont: Arial, "sans-serif";
 
 // Defaults
 #app {
@@ -19,4 +27,20 @@ $bodyFont: Arial, 'sans-serif';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
+}
+
+// Content wrappers
+.container {
+    @media screen and (max-width: $mobile) {
+        padding: 0 0.5em;
+    }
+    @media screen and (max-width: $tablet) {
+        padding: 0 1em;
+    }
+    @media screen and (max-width: $desktop) {
+        padding: 0 3em;
+    }
+}
+section {
+  height: calc(100vh - $footerHeight);
 }
