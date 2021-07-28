@@ -4,6 +4,16 @@
 $padding: 0.25em;
 $gutter: 1em;
 
+* {
+    box-sizing: border-box;
+}
+
+// Colours 
+
+.is-light {
+    color: #efefef;
+}
+
 // Typographic Alignment
 
 .has-text-centered {
@@ -20,6 +30,10 @@ $gutter: 1em;
 }
 
 // Positioning system
+
+.is-inline-flex {
+    display: inline-flex;
+}
 
 .is-relative {
     position: relative;

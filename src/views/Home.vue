@@ -1,15 +1,13 @@
 <template>
   <section v-if="mortyData && mortyData.results">
-      <!-- TODO: Search bar -->
-      <h1>Search</h1>
       <!-- 12 column content grid -->
       <div class="container">
         <section class="cols is-wrappable">
           <div @click="toggleModal" class="col is-3 is-clickable" v-for="(character, c) in mortyData.results" v-bind:key="c">
-            <character>
-              <p>{{character.name}}</p>
-              <img :src="character.image" :alt="'image for '+character.name" width="20" height="20">
-            </character>
+              <div class="char has-text-centered">
+                <img :src="character.image" :alt="'image for '+character.name" class="char-image" >
+                <small>{{character.name}}</small>
+              </div>
           </div>
         </section>
       </div>
@@ -54,5 +52,16 @@ export default {
 </script>
 
 <style lang="scss">
-
+  .char {
+    transition: all 0.3s ease;
+    transform: scale(1);
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  .char-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
 </style>
