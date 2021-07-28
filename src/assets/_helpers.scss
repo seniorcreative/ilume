@@ -1,34 +1,49 @@
+// SmithCSS Framework v1.0 for Ilume demo
+// Vars
+
 $padding: 0.25em;
 $gutter: 1em;
 
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.2);
-    &-content {
-        padding: $gutter;
-        width: calc(80% - ($gutter * 2));
-        height: calc(80vh - ($gutter * 2));
-        margin: 10vh $gutter;
-        background-color: rgba(#fff, 0.8);
-        border-radius: 5px;
-    }
-}
+// Typographic Alignment
 
 .has-text-centered {
     text-align: center;
 }
 
-.is-clickable {
-    cursor: pointer;
+// Form
+
+.input {
+    padding: 0.25em 0.5em;
+    border: 1px solid #efefef;
+    border-radius: 5px;
+    background: white;
 }
+
+// Positioning system
+
+.is-relative {
+    position: relative;
+}
+
+.is-absolute {
+    position: absolute;
+}
+
+.is-fixed {
+    position: fixed;
+}
+
+// Flex
 
 .is-flex {
     display: flex;
 }
+
+.is-flex-spread {
+    justify-content: space-between;
+}
+
+// Buttons
 
 .button {
     border-radius: 5px;
@@ -37,6 +52,12 @@ $gutter: 1em;
     background: none;
     border: 1px solid #efefef;
 }
+
+.is-clickable {
+    cursor: pointer;
+}
+
+// Grid
 
 .cols {
     margin-left: -($gutter/2);
@@ -52,12 +73,31 @@ $gutter: 1em;
         padding: $gutter/2;
         display: block;
         flex: none;
-        // flex-basis: 0;
-        // flex-grow: 1;
-        // flex-shrink: 1;
         // TODO: Work these into a looping sass method
-        &.is-3 {
+        &.is-3, &.is-quarter {
             width: percentage(1 / (12/3));
         }
+        &.is-6, &.is-half {
+            width: percentage(1 / (12/6));
+        }
+    }
+}
+
+// Modals
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.2);
+    &-content {
+        padding: $gutter;
+        width: calc(80% - ($gutter * 2));
+        height: calc(80vh - ($gutter * 2));
+        margin: 10vh $gutter;
+        background-color: rgba(#fff, 0.8);
+        border-radius: 5px;
     }
 }

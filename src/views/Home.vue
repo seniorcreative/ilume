@@ -1,12 +1,15 @@
 <template>
   <section v-if="mortyData && mortyData.results">
+      <!-- TODO: Search bar -->
       <h1>Search</h1>
-      <button type="button" class="button has-text-centered" @click="toggleModal">Toggle Modal <i class="icon-loop2"></i></button>
       <!-- 12 column content grid -->
       <div class="container">
         <section class="cols is-wrappable">
-          <div class="col is-3" v-for="(character, c) in mortyData.results" v-bind:key="c">
-            <p>{{character.name}}</p>
+          <div @click="toggleModal" class="col is-3 is-clickable" v-for="(character, c) in mortyData.results" v-bind:key="c">
+            <character>
+              <p>{{character.name}}</p>
+              <img :src="character.image" :alt="'image for '+character.name" width="20" height="20">
+            </character>
           </div>
         </section>
       </div>
@@ -35,6 +38,9 @@ export default {
     },
     setData (data) {
       this.mortyData = data
+    },
+    searchCharacter (pattern) {
+      // Search through this page.
     }
   },
   created () {
