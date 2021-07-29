@@ -111,8 +111,8 @@
 // Grid
 
 .cols {
-    margin-left: -($gutter/2);
-    margin-right: -($gutter/2);
+    margin-left: -0.5em;
+    margin-right: -0.5em;
     display: flex;
     &.is-wrappable {
         flex-wrap: wrap;
@@ -121,18 +121,18 @@
         box-sizing: border-box;
     }
     .col {
-        padding: $gutter/2;
+        padding: 0.5em;
         display: block;
         flex: none;
         // TODO: Work these into a looping sass method
         &.is-3, &.is-quarter {
-            width: percentage(1 / (12/3));
+            width: 25%;
         }
         &.is-4, &.is-third {
-            width: percentage(1 / (12/4));
+            width: 33.33%;
         }
         &.is-6, &.is-half {
-            width: percentage(1 / (12/6));
+            width: 50%;
         }
     }
 }
@@ -151,8 +151,8 @@
     &-content, &.modal-content {
         z-index: 4;
         padding: $gutter;
-        width: calc(80% - ($gutter * 2));
-        height: calc(80vh - ($gutter * 2));
+        width: calc(80% - 2em);
+        height: calc(80vh - 2em);
         margin: 10vh $gutter;
         background-color: #fff;
         border-radius: 5px;
