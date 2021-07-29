@@ -4,9 +4,9 @@ import * as appRouter from './appRouter'
 import store from './store'
 import http from './http'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faChevronLeft, faChevronRight, faSearch, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft, faChevronRight, faSearch, faTimesCircle, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faChevronLeft, faChevronRight, faSearch, faTimesCircle)
+library.add(faChevronLeft, faChevronRight, faSearch, faTimesCircle, faChevronDown, faChevronUp)
 const app = createApp(App)
 
 app.use(appRouter.routeConfig)

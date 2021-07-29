@@ -62,7 +62,7 @@ export default {
     showCharacter (character) {
       // Load character data then show the modal
       const axiosInstance = axios.create()
-      axiosInstance.get(`/character/?page=${character.id}`)
+      axiosInstance.get(`/character/${character.id}`)
         .then(res => {
           this.characterData = res
           this.toggleModal()

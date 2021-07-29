@@ -20,6 +20,10 @@
     text-align: center;
 }
 
+.has-text-left {
+    text-align: left;
+}
+
 // Form
 
 .input {
@@ -74,8 +78,8 @@
     border-radius: 5px;
     padding: 0.25em 0.5em;
     font-size: 22px;
-    background: none;
-    border: 1px solid #efefef;
+    background: $green;
+    border: 1px solid #ddd;
 }
 
 .is-clickable {
@@ -127,7 +131,7 @@
         width: calc(80% - ($gutter * 2));
         height: calc(80vh - ($gutter * 2));
         margin: 10vh $gutter;
-        background-color: rgba(#fff, 0.8);
+        background-color: #fff;
         border-radius: 5px;
     }
 }
