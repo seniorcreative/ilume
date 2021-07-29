@@ -15,15 +15,17 @@
         <dialog-view @on-close-modal="toggleModal" :characterData="characterData" v-if="showModal" />
       </transition>
   </section>
+  <loader-view v-if="isLoading" />
 </template>
 
 <script>
 import DialogView from '../components/DialogView.vue'
+import LoaderView from '../components/LoaderView.vue'
 import axios from 'axios'
 
 export default {
   name: 'Home',
-  components: { DialogView },
+  components: { DialogView, LoaderView },
   props: {
     search: String
   },
@@ -34,7 +36,8 @@ export default {
       mortySearchData: null,
       currentPage: 1,
       selectedCharacterIndex: null,
-      characterData: null
+      characterData: null,
+      isLoading: false
     }
   },
   methods: {
@@ -70,13 +73,27 @@ export default {
         // TODO: catch and manage errors
     },
     pageChange (pageNum) {
-      const axiosInstance = axios.create()
-      axiosInstance.get(`/character/?page=${pageNum}`)
-        .then(res => {
-          this.setData(res.data)
-          this.$emit('onPageChange', pageNum)
-        })
+      // Clear the data
+      this.setData(null)
+      // Go to page top
+      window.scrollTo(0, 0)
+      // Show the loader
+      this.isLoading = true
+      // Load... with a small UX delay for humans
+      const scope = this
+      setTimeout(() => {
+        const axiosInstance = axios.create()
+        axiosInstance.get(`/character/?page=${pageNum}`)
+          .then(res => {
+            scope.setData(res.data)
+            // Turn off loading mode... with a small UX delay for humans
+            setTimeout(() => {
+              scope.isLoading = false
+            }, 250)
+            scope.$emit('onPageChange', pageNum)
+          })
         // TODO: catch and manage errors
+      }, 250)
     }
   },
   watch: {
@@ -89,11 +106,7 @@ export default {
     }
   },
   created () {
-    const axiosInstance = axios.create()
-    axiosInstance.get(`/character/?page=${this.currentPage}`)
-      .then(res => {
-        this.setData(res.data)
-      })
+    this.pageChange(1)
   }
 }
 </script>

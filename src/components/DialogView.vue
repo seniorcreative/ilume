@@ -1,9 +1,11 @@
 <template>
   <div class="modal">
-    <div class="modal-content is-relative" v-if="characterData">
+    <div class="modal-content is-relative has-text-left" v-if="characterData">
       <div @click="closeModal" class="is-absolute is-clickable" style="top: 1em; right: 1em;"><font-awesome-icon :icon="['fa', 'times-circle']" /></div>
-      <h2>{{characterData.data.name}}</h2>
-      <img :src="characterData.data.image">
+      <!-- <div class="is-flex is-flex-level"> -->
+        <h2>{{characterData.data.name}}</h2>
+        <img :src="characterData.data.image" class='char-image'>
+      <!-- </div> -->
       <article class="has-text-left">
         <div class="character-data">
 
@@ -24,13 +26,13 @@
           </div>
         </div>
       </article>
-      <button type="button" @click="toggleEpisodes" class="button">Episodes
+      <button type="button" @click="getEpisodes" class="button is-smaller">Episodes
         <font-awesome-icon v-if="!showEpisodes" :icon="['fa', 'chevron-down']" />
         <font-awesome-icon v-if="showEpisodes" :icon="['fa', 'chevron-up']" />
       </button>
-      <div class="episodes" v-show="showEpisodes">
-          <ol v-for="(ep, i) in characterData.data.episode" v-bind:key="i">
-            <li><a :href="ep">{{ep}}</a></li>
+      <div class="episodes" v-if="episodeData" v-show="showEpisodes">
+          <ol v-for="(ep, i) in episodeData" v-bind:key="i">
+            <li><a :href="ep" target="_blank">{{ep.name}}</a></li>
           </ol>
       </div>
     </div>
@@ -39,6 +41,8 @@
 
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import axios from 'axios'
+
 export default {
   name: 'DialogView',
   props: {
@@ -46,7 +50,8 @@ export default {
   },
   data () {
     return {
-      showEpisodes: false
+      showEpisodes: false,
+      episodeData: null
     }
   },
   components: {
@@ -58,29 +63,72 @@ export default {
     },
     toggleEpisodes () {
       this.showEpisodes = !this.showEpisodes
+    },
+    getEpisodes () {
+      if (!this.showEpisodes) {
+        const axiosInstance = axios.create()
+        axiosInstance.get(`/episode/${this.episodeList}`)
+          .then(res => {
+            this.episodeData = res.data
+            this.showEpisodes = true
+          }
+          )
+      } else {
+        this.showEpisodes = false
+      }
     }
-
+  },
+  computed: {
+    episodeList () {
+      const Eps = this.characterData && this.characterData.data.episode.map(e => {
+        return e.split('https://rickandmortyapi.com/api/episode/')[1]
+      })
+      return Eps.join(',')
+    }
   }
 }
 </script>
 
 <style lang="scss">
-  .label {
-    margin-right: 1em;
-  }
   h2 {
     margin: 0 0 1em 0;
     font-weight: bold;
     font-size: 1.25em;
   }
-  label, .episodes {
+  label {
+    display: inline-block;
+    min-width: 80px;
     font-family: 'Courier New', Courier, monospace;
+    margin-right: 1em;
+    font-weight: normal;
+  }
+  .episodes {
+    margin: 1em 0;
+    max-height: 150px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8em;
+    line-height: 1.2;
+    overflow: scroll;
+    text-align: left;
+    a {
+      &:before {
+        content: '•';
+      }
+      display: inline-block;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: black;
+    }
   }
   .data-row {
     margin: 0 0 0.5em 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
   }
-  img {
-    border-radius: 12px;
+  .char-image {
+    border-radius: 20px;
+    max-width: 150px;
+    height: auto;
   }
   article {
     margin: 1em 0;

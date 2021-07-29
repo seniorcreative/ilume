@@ -19,14 +19,14 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 export default {
   name: 'FooterBar',
+  components: { FontAwesomeIcon },
   props: {
     currentPage: Number
   },
   data () {
     return {
     }
-  },
-  components: { FontAwesomeIcon }
+  }
 }
 </script>
 
