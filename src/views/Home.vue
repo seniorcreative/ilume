@@ -4,10 +4,7 @@
       <div class="container">
         <section class="cols is-wrappable  content-section">
           <div @click="showCharacter(character)" class="col is-4 is-clickable" v-for="(character, c) in getMortyData()" v-bind:key="c">
-              <div class="char has-text-centered">
-                <img :src="character.image" :alt="'image for '+character.name" class="char-image" >
-                <small class="is-green">{{character.name}}</small>
-              </div>
+              <character :char="character" :delay="c"></character>
           </div>
         </section>
       </div>
@@ -21,11 +18,12 @@
 <script>
 import DialogView from '../components/DialogView.vue'
 import LoaderView from '../components/LoaderView.vue'
+import Character from '../components/Character.vue'
 import axios from 'axios'
 
 export default {
   name: 'Home',
-  components: { DialogView, LoaderView },
+  components: { DialogView, LoaderView, Character },
   props: {
     search: String
   },
@@ -112,18 +110,6 @@ export default {
 </script>
 
 <style lang="scss">
-  .char {
-    transition: all 0.3s ease;
-    transform: scale(1);
-    &:hover {
-      transform: scale(1.1);
-    }
-  }
-  .char-image {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-  }
   .content-section {
     padding: 2em
   }

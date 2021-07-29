@@ -2,11 +2,11 @@
   <footer class="footer is-flex is-flex-spread is-flex-level container is-fixed">
     <!-- Left Chevron -->
     <router-link :to="{ name: 'home', params: {pg: Math.max(1, currentPage -1), q: ''}}" class="button button-round button-round-left is-clickable">
-      <font-awesome-icon :icon="['fa', 'chevron-left']" />
+      <font-awesome-icon class="is-relative" style="left: -3px;" :icon="['fa', 'chevron-left']" />
     </router-link>
     <!--  Page Number -->
     <!-- TODO: Implement loading mechanism... -->
-    <p class="size-2 is-light">Page {{currentPage}}</p>
+    <p class="size-2 is-light">Page {{currentPage}} / 34</p>
     <!-- Right Chevron -->
     <!-- TODO: Wire to max pages -->
     <router-link :to="{ name: 'home', params: {pg: Math.min(34, currentPage + 1), q: ''}}" class="button button-round button-round-right is-clickable">
@@ -62,7 +62,7 @@ export default {
     }
   }
   .size-2 {
-    font-size: 2em;
+    font-size: 1em;
     width: 120px;
   }
 </style>
