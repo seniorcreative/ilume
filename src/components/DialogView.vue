@@ -8,7 +8,6 @@
       <!-- </div> -->
       <article class="has-text-left">
         <div class="character-data">
-
           <div class="data-row">
             <label>Status</label> {{characterData.data.status || 'N/A'}}
           </div>
@@ -32,7 +31,7 @@
       </button>
       <div class="episodes" v-if="episodeData" v-show="showEpisodes">
           <ol v-for="(ep, i) in episodeData" v-bind:key="i">
-            <li><a :href="ep" target="_blank">{{ep.name}}</a></li>
+            <li><a :href="'https://rickandmortyapi.com/api/episode/' + ep.id" target="_blank">{{ep.name}}</a></li>
           </ol>
       </div>
     </div>
@@ -99,20 +98,20 @@ export default {
     display: inline-block;
     min-width: 80px;
     font-family: 'Courier New', Courier, monospace;
-    margin-right: 1em;
+    margin-right: 0.5em;
     font-weight: normal;
   }
   .episodes {
-    margin: 1em 0;
+    margin: 0.5em 0;
     max-height: 150px;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 0.8em;
-    line-height: 1.2;
+    font-size: 1em;
+    line-height: 1;
     overflow: scroll;
     text-align: left;
     a {
       &:before {
-        content: '•';
+        content: '> ';
       }
       display: inline-block;
       margin-bottom: 10px;
