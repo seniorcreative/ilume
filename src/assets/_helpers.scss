@@ -151,8 +151,8 @@
     &-content, &.modal-content {
         z-index: 4;
         padding: $gutter;
-        width: calc(80% - 2em);
         height: calc(80vh - 2em);
+        width: calc(100% - 2em);
         margin: 10vh auto;
         background-color: #fff;
         border-radius: 5px;
