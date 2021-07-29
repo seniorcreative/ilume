@@ -10,6 +10,7 @@
               </div>
           </div>
         </section>
+        <p class="has-text-centered">{{currentPage}}</p>
       </div>
       <transition name="fade">
         <dialog-view @on-close-modal="toggleModal" v-if="showModal" />
@@ -27,7 +28,8 @@ export default {
   data () {
     return {
       showModal: false,
-      mortyData: null
+      mortyData: null,
+      currentPage: 1
     }
   },
   methods: {
@@ -39,6 +41,19 @@ export default {
     },
     searchCharacter (pattern) {
       // Search through this page.
+    },
+    pageChange (pageNum) {
+      const axiosInstance = axios.create()
+      axiosInstance.get(`/character/?page=${pageNum}`)
+        .then(res => {
+          this.setData(res.data)
+        })
+    }
+  },
+  watch: {
+    $route: function (p) {
+      this.currentPage = Number(this.$route.params.pg)
+      this.pageChange(this.currentPage)
     }
   },
   created () {
