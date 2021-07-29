@@ -30,13 +30,19 @@
         </div>
       </div>
       <div class="border-line"></div>
-      <button type="button" @click="getEpisodes" class="button is-smaller is-plain is-padless-h is-clickable">
-        <span v-if="!showEpisodes">Show</span>
-        <span v-if="showEpisodes">Hide</span> episodes
-        <font-awesome-icon v-if="!showEpisodes" :icon="['fa', 'chevron-down']" />
-        <font-awesome-icon v-if="showEpisodes" :icon="['fa', 'chevron-up']" />
+      <button type="button" @click="getEpisodes" class="button is-medium is-plain is-padless-h is-clickable">
+        <span class="is" v-if="isLoading">
+          Loading episodes&hellip;
+        </span>
+        <span v-if="!isLoading">
+          <span v-if="!showEpisodes">Show</span>
+          <span v-if="showEpisodes">Hide</span> episodes
+          <font-awesome-icon v-if="!showEpisodes" :icon="['fa', 'chevron-down']" />
+          <font-awesome-icon v-if="showEpisodes" :icon="['fa', 'chevron-up']" />
+        </span>
       </button>
-      <p v-if="showEpisodes">{{characterFirstName}} is in {{numEpisodes}} episodes &hellip; scroll for more</p>
+      <p v-if="showEpisodes">{{characterFirstName}} is in {{numEpisodes}} episode<span v-if="numEpisodes != 1">s</span>
+      <span v-if="numEpisodes > 20">&hellip; scroll for more</span></p>
       <div class="episodes" v-if="episodeData" v-show="showEpisodes">
           <ol v-for="(ep, i) in episodeData" v-bind:key="i">
             <li>
@@ -62,7 +68,8 @@ export default {
   data () {
     return {
       showEpisodes: false,
-      episodeData: null
+      episodeData: null,
+      isLoading: false
     }
   },
   components: {
@@ -76,12 +83,15 @@ export default {
       this.showEpisodes = !this.showEpisodes
     },
     getEpisodes () {
+      this.isLoading = true
       if (!this.showEpisodes) {
         const axiosInstance = axios.create()
         axiosInstance.get(`/episode/${this.episodeList}`)
           .then(res => {
-            this.episodeData = res.data
+            this.episodeData = res.data.length > 1 ? res.data : [res.data]
             this.showEpisodes = true
+            // TODO: Put a timer on this for better UX
+            this.isLoading = false
           }
           )
       } else {
@@ -147,7 +157,7 @@ export default {
     font-weight: bold;
   }
   .char-image {
-    margin: 0.5em 0;
+    margin: 0.5em auto;
     border-radius: 20px;
     max-width: 150px;
     height: auto;

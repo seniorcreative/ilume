@@ -27,7 +27,7 @@
 // Form
 
 .input {
-    font-family: $bodyFont;
+    font-family: 'Courier New', Courier, monospace;
     padding: 0 0.5em;
     min-width: 150px;
     height: 32px;
@@ -86,6 +86,11 @@
 
     &.is-smaller {
         font-size: 0.9em;
+        padding: 0.25em 0.5em;
+    }
+
+    &.is-medium {
+        font-size: 1em;
         padding: 0.25em 0.5em;
     }
 

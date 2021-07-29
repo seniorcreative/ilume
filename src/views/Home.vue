@@ -3,7 +3,7 @@
       <!-- 12 column content grid -->
       <div class="container">
         <section class="cols is-wrappable  content-section">
-          <div @click="showCharacter(character)" class="col is-4 is-clickable" v-for="(character, c) in getMortyData()" v-bind:key="c">
+          <div @click="showCharacter(character)" class="col is-clickable" v-bind:class="gridClass" v-for="(character, c) in getMortyData()" v-bind:key="c">
               <character :char="character" :delay="c"></character>
           </div>
         </section>
@@ -35,7 +35,9 @@ export default {
       currentPage: 1,
       selectedCharacterIndex: null,
       characterData: null,
-      isLoading: false
+      isLoading: false,
+      windowWidth: window.innerWidth,
+      gridClass: 'is-4'
     }
   },
   methods: {
@@ -62,11 +64,18 @@ export default {
     },
     showCharacter (character) {
       // Load character data then show the modal
+      // Show the loader
+      this.isLoading = true
+      // Load... with a small UX delay for humans
+      const scope = this
       const axiosInstance = axios.create()
       axiosInstance.get(`/character/${character.id}`)
         .then(res => {
           this.characterData = res
           this.toggleModal()
+          setTimeout(() => {
+            scope.isLoading = false
+          }, 250)
         })
         // TODO: catch and manage errors
     },
@@ -92,19 +101,29 @@ export default {
           })
         // TODO: catch and manage errors
       }, 250)
+    },
+    onResize (w) {
+      this.windowWidth = window.innerWidth
     }
   },
   watch: {
-    $route: function (p) {
+    $route (p) {
       this.currentPage = Number(this.$route.params.pg)
       this.pageChange(this.currentPage)
     },
-    search: function (s) {
+    search (s) {
       this.searchCharacter(s)
+    },
+    windowWidth () {
+      this.gridClass = this.windowWidth < 768 ? 'is-4' : 'is-3'
     }
   },
-  created () {
+  mounted () {
     this.pageChange(1)
+    window.addEventListener('resize', this.onResize)
+  },
+  beforeUnmount () {
+    window.removeEventListener('resize', this.onResize)
   }
 }
 </script>
