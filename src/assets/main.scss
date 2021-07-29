@@ -3,7 +3,9 @@
 // Includes
 @import "./reset.meyer";
 @import "./helpers";
+@import "./fonts";
 @import "./transitions";
+
 // Breakpoints
 $mobile: 768px;
 $tablet: 1024px;
@@ -17,8 +19,8 @@ $light: #efefef;
 $footerHeight: 200px;
 
 // Fonts
-$headingFont: Arial, "sans-serif";
-$bodyFont: Arial, "sans-serif";
+$headingFont: 'Get Schwifty', Arial, "sans-serif";
+$bodyFont: 'Get Schwifty', Arial, "sans-serif";
 
 // Defaults
 #app {
@@ -40,6 +42,7 @@ $bodyFont: Arial, "sans-serif";
         padding: 0 3em;
     }
 }
+
 section {
   height: calc(100vh - $footerHeight);
 }
