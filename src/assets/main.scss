@@ -1,27 +1,12 @@
-/* Morty Theme */
+/* SmithCSS Theme */
 
 // Includes
 @import "./reset.meyer";
+@import "./variables";
 @import "./helpers";
 @import "./fonts";
 @import "./transitions";
 @import "./animations";
-
-// Breakpoints
-$mobile: 768px;
-$tablet: 1024px;
-$desktop: 1980px;
-
-// Colours
-$dark: #333;
-$light: #efefef;
-
-// Elements
-$footerHeight: 200px;
-
-// Fonts
-$headingFont: 'Get Schwifty', Arial, "sans-serif";
-$bodyFont: 'Get Schwifty', Arial, "sans-serif";
 
 // Defaults
 #app {
@@ -34,20 +19,37 @@ $bodyFont: 'Get Schwifty', Arial, "sans-serif";
 // Credit https://codepen.io/P1N2O/pen/pyBNzX
 body {
 	background: linear-gradient(-45deg, #2aee44, #70022c, #23a6d5, #000807);
-	background-size: 400% 400%;
+	background-size: 400% 500vh;
 	animation: gradient 12s ease infinite;
 }
 
 // Content wrappers
 .container {
-    @media screen and (max-width: $mobile) {
+    section {
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    @media (min-width: 0) and (max-width: 767px) {
         padding: 0 0.5em;
+        section {
+            margin-top: 6em;
+            margin-bottom: 5em;
+        }
     }
-    @media screen and (max-width: $tablet) {
+    @media (min-width: 768px) and (max-width: 1023px) {
         padding: 0 1em;
+        section {
+            margin-top: 6em;
+            margin-bottom: 5em;
+        }
     }
-    @media screen and (max-width: $desktop) {
+    @media (min-width: 1024px) and (max-width: 1980px) {
         padding: 0 3em;
+        section {
+            margin-top: 6em;
+            margin-bottom: 5em;
+        }
     }
 }
 

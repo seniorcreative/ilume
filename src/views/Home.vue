@@ -3,16 +3,16 @@
       <!-- 12 column content grid -->
       <div class="container">
         <section class="cols is-wrappable  content-section">
-          <div @click="toggleModal" class="col is-3 is-clickable" v-for="(character, c) in getMortyData()" v-bind:key="c">
+          <div @click="showCharacter(character)" class="col is-4 is-clickable" v-for="(character, c) in getMortyData()" v-bind:key="c">
               <div class="char has-text-centered">
                 <img :src="character.image" :alt="'image for '+character.name" class="char-image" >
-                <small class="is-light" style="display: block; margin: 5px 0;">{{character.name}}</small>
+                <small class="is-green">{{character.name}}</small>
               </div>
           </div>
         </section>
       </div>
       <transition name="fade">
-        <dialog-view @on-close-modal="toggleModal" v-if="showModal" />
+        <dialog-view @on-close-modal="toggleModal" :characterData="characterData" v-if="showModal" />
       </transition>
   </section>
 </template>
@@ -32,7 +32,9 @@ export default {
       showModal: false,
       mortyData: null,
       mortySearchData: null,
-      currentPage: 1
+      currentPage: 1,
+      selectedCharacterIndex: null,
+      characterData: null
     }
   },
   methods: {
@@ -48,7 +50,6 @@ export default {
     },
     searchCharacter (pattern) {
       // Search through this page.
-      console.log('searching for ', pattern)
       const tmpData = []
       for (let m = 0; m < this.mortyData.results.length; m++) {
         const character = this.mortyData.results[m]
@@ -56,8 +57,17 @@ export default {
           tmpData.push(character)
         }
       }
-      console.log('tmpData', tmpData)
       this.mortySearchData = { info: this.mortyData.info, results: tmpData }
+    },
+    showCharacter (character) {
+      // Load character data then show the modal
+      const axiosInstance = axios.create()
+      axiosInstance.get(`/character/?page=${character.id}`)
+        .then(res => {
+          this.characterData = res
+          this.toggleModal()
+        })
+        // TODO: catch and manage errors
     },
     pageChange (pageNum) {
       const axiosInstance = axios.create()
@@ -66,6 +76,7 @@ export default {
           this.setData(res.data)
           this.$emit('onPageChange', pageNum)
         })
+        // TODO: catch and manage errors
     }
   },
   watch: {

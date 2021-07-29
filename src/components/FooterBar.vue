@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer is-flex is-flex-spread is-flex-level container">
+  <footer class="footer is-flex is-flex-spread is-flex-level container is-fixed">
     <!-- Left Chevron -->
     <router-link :to="{ name: 'home', params: {pg: Math.max(1, currentPage -1), q: ''}}" class="button button-round button-round-left is-clickable">
       <font-awesome-icon :icon="['fa', 'chevron-left']" />
@@ -9,7 +9,7 @@
     <p class="size-2 is-light">Page {{currentPage}}</p>
     <!-- Right Chevron -->
     <!-- TODO: Wire to max pages -->
-    <router-link :to="{ name: 'home', params: {pg: currentPage + 1, q: ''}}" class="button button-round button-round-right is-clickable">
+    <router-link :to="{ name: 'home', params: {pg: Math.min(34, currentPage + 1), q: ''}}" class="button button-round button-round-right is-clickable">
       <font-awesome-icon :icon="['fa', 'chevron-right']" />
     </router-link>
   </footer>
@@ -32,11 +32,13 @@ export default {
 
 <style lang="scss" scoped>
   .footer {
-    margin: 1em;
+    margin: 0;
     width: calc(100% - 2em);
     background: #000;
     padding: 1em 3em;
     border-radius: 12px;
+    bottom: 1em;
+    left: 1em;
   }
   .button-round {
     border-radius: 50%;

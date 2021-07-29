@@ -1,5 +1,5 @@
 <template>
-  <header class="is-flex is-flex-spread is-flex-level">
+  <header class="is-flex is-flex-spread is-flex-level is-fixed">
     <router-link to="/1/" title="Back to page 1"><img src="../assets/Rick_and_Morty.png" width="150"></router-link>
     <div class="is-relative">
       <input type="text" class="input" v-model="searchValue" name="search" placeholder="Search...">
@@ -33,8 +33,11 @@ export default {
 
 <style lang="scss" scoped>
   header {
+    top: 0;
+    left: 0;
     background: black;
     padding: 2em;
     width: 100%;
+    z-index: 1;
   }
 </style>

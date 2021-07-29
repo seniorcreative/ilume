@@ -1,8 +1,4 @@
 // SmithCSS Framework v1.0 for Ilume demo
-// Vars
-
-$padding: 0.25em;
-$gutter: 1em;
 
 * {
     box-sizing: border-box;
@@ -14,6 +10,10 @@ $gutter: 1em;
     color: #efefef;
 }
 
+.is-green {
+    color: $green;
+}
+
 // Typographic Alignment
 
 .has-text-centered {
@@ -23,8 +23,9 @@ $gutter: 1em;
 // Form
 
 .input {
+    font-family: $bodyFont;
     padding: 0 0.5em;
-    width: 200px;
+    min-width: 150px;
     height: 32px;
     border: 1px solid #efefef;
     border-radius: 5px;
@@ -63,7 +64,7 @@ $gutter: 1em;
 }
 
 .is-flex-level {
-    align-content: center;
+    align-items: center;
 }
 
 
@@ -101,6 +102,9 @@ $gutter: 1em;
         &.is-3, &.is-quarter {
             width: percentage(1 / (12/3));
         }
+        &.is-4, &.is-third {
+            width: percentage(1 / (12/4));
+        }
         &.is-6, &.is-half {
             width: percentage(1 / (12/6));
         }
@@ -111,12 +115,14 @@ $gutter: 1em;
 
 .modal {
     position: fixed;
+    z-index: 3;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
     background: rgba(0, 0, 0, 0.2);
-    &-content {
+    &-content, &.modal-content {
+        z-index: 4;
         padding: $gutter;
         width: calc(80% - ($gutter * 2));
         height: calc(80vh - ($gutter * 2));
