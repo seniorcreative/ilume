@@ -1,9 +1,15 @@
 <template>
-  <footer class="is-flex is-flex-spread">
-    <router-link :to="{ name: 'home', params: {pg: 1}}" class="button button-round is-clickable">
+  <footer class="footer is-flex is-flex-spread is-flex-level container">
+    <!-- Left Chevron -->
+    <router-link :to="{ name: 'home', params: {pg: Math.max(1, currentPage -1), q: ''}}" class="button button-round button-round-left is-clickable">
       <font-awesome-icon :icon="['fa', 'chevron-left']" />
     </router-link>
-    <router-link :to="{ name: 'home', params: {pg: 2}}" class="button button-round  is-clickable">
+    <!--  Page Number -->
+    <!-- TODO: Implement loading mechanism... -->
+    <p class="size-2 is-light">Page {{currentPage}}</p>
+    <!-- Right Chevron -->
+    <!-- TODO: Wire to max pages -->
+    <router-link :to="{ name: 'home', params: {pg: currentPage + 1, q: ''}}" class="button button-round button-round-right is-clickable">
       <font-awesome-icon :icon="['fa', 'chevron-right']" />
     </router-link>
   </footer>
@@ -13,15 +19,48 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 export default {
   name: 'FooterBar',
+  props: {
+    currentPage: Number
+  },
   data () {
     return {
-      currentPage: 1
     }
   },
   components: { FontAwesomeIcon }
 }
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
+  .footer {
+    margin: 1em;
+    width: calc(100% - 2em);
+    background: #000;
+    padding: 1em 3em;
+    border-radius: 12px;
+  }
+  .button-round {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    background: #555;
+    text-align: center;
+    border: 2px solid greenyellow;
+    color: greenyellow;
+    transition: all 0.2s ease-in-out;
+    transform: scale(1);
+    &-left {
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+    &-right {
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+  .size-2 {
+    font-size: 2em;
+    width: 120px;
+  }
 </style>

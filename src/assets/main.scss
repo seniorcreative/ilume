@@ -5,6 +5,7 @@
 @import "./helpers";
 @import "./fonts";
 @import "./transitions";
+@import "./animations";
 
 // Breakpoints
 $mobile: 768px;
@@ -28,6 +29,13 @@ $bodyFont: 'Get Schwifty', Arial, "sans-serif";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
+}
+
+// Credit https://codepen.io/P1N2O/pen/pyBNzX
+body {
+	background: linear-gradient(-45deg, #2aee44, #70022c, #23a6d5, #000807);
+	background-size: 400% 400%;
+	animation: gradient 12s ease infinite;
 }
 
 // Content wrappers

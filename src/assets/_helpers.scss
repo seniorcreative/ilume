@@ -23,10 +23,15 @@ $gutter: 1em;
 // Form
 
 .input {
-    padding: 0.25em 0.5em;
+    padding: 0 0.5em;
+    width: 200px;
+    height: 32px;
     border: 1px solid #efefef;
     border-radius: 5px;
     background: white;
+    &:focus {
+        outline: none;
+    }
 }
 
 // Positioning system
@@ -56,6 +61,11 @@ $gutter: 1em;
 .is-flex-spread {
     justify-content: space-between;
 }
+
+.is-flex-level {
+    align-content: center;
+}
+
 
 // Buttons
 
